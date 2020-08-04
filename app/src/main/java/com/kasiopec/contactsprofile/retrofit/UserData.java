@@ -93,7 +93,7 @@ public class UserData {
         this.company = company;
     }
 
-    static class Geo {
+    public static class Geo {
 
         @SerializedName("lat")
         @Expose
@@ -120,7 +120,7 @@ public class UserData {
 
     }
 
-    static class Company {
+    public static class Company {
 
         @SerializedName("name")
         @Expose
@@ -158,7 +158,7 @@ public class UserData {
 
     }
 
-    static class Address {
+    public static class Address {
 
         @SerializedName("street")
         @Expose

@@ -3,6 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.kasiopec.contactsprofile"
         minSdkVersion 21
@@ -38,9 +43,14 @@ dependencies {
     //Retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
 
 
 

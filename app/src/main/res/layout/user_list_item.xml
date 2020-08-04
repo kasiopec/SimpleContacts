@@ -20,18 +20,19 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/userCardLayout"
+            android:id="@+id/detailsCardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
 
 
             <com.github.abdularis.civ.AvatarImageView
-                android:id="@+id/userPhoto"
+                android:id="@+id/userDetailsPhoto"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                app:highlightEnable="false"
                 app:avatarBackgroundColor="@color/colorAccent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,25 +41,26 @@
                 app:textSize="22sp" />
 
             <TextView
-                android:id="@+id/userName"
-                android:layout_width="wrap_content"
+                android:id="@+id/userDetailsName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/user_name"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/userPhoto"
-                app:layout_constraintTop_toTopOf="@+id/userPhoto" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userDetailsPhoto"
+                app:layout_constraintTop_toTopOf="@+id/userDetailsPhoto" />
 
             <TextView
-                android:id="@+id/userEmail"
+                android:id="@+id/userDetailsEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/user_email"
-                app:layout_constraintStart_toEndOf="@+id/userPhoto"
-                app:layout_constraintTop_toBottomOf="@+id/userName" />
+                app:layout_constraintStart_toEndOf="@+id/userDetailsPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/userDetailsName" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

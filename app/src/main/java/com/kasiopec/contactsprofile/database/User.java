@@ -1,12 +1,14 @@
 package com.kasiopec.contactsprofile.database;
 
 
+import java.io.Serializable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
-public class User {
+public class User implements Serializable {
 
     @PrimaryKey
     @ColumnInfo(name = "id")

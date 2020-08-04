@@ -44,12 +44,12 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         holder.email.setText(usersList.get(position).getEmail());
         char userNameChar = usersList.get(position).getName().charAt(0);
 
-        if(usersList.get(position).getImageUrl().equals("")){
+        if (usersList.get(position).getImageUrl().equals("")) {
             holder.userPhoto.setText(String.valueOf(userNameChar));
-        }else{
+        } else {
             Picasso.get().load(usersList.get(position).getImageUrl()).into(holder.userPhoto);
         }
-        holder.userCard.setOnClickListener(view -> clickHandler.onItemClicked());
+        holder.userCard.setOnClickListener(view -> clickHandler.onItemClicked(usersList.get(position)));
     }
 
     @Override
@@ -69,9 +69,9 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.userName);
-            email = itemView.findViewById(R.id.userEmail);
-            userPhoto = itemView.findViewById(R.id.userPhoto);
+            name = itemView.findViewById(R.id.userDetailsName);
+            email = itemView.findViewById(R.id.userDetailsEmail);
+            userPhoto = itemView.findViewById(R.id.userDetailsPhoto);
             userCard = itemView.findViewById(R.id.userCard);
 
         }

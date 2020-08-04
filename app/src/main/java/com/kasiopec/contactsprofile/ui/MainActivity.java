@@ -7,10 +7,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.kasiopec.contactsprofile.Contract;
 import com.kasiopec.contactsprofile.R;
+import com.kasiopec.contactsprofile.database.User;
 import com.kasiopec.contactsprofile.repository.UserRepository;
 import com.kasiopec.contactsprofile.presenter.Presenter;
 import com.kasiopec.contactsprofile.retrofit.UserData;
@@ -57,8 +59,10 @@ public class MainActivity extends AppCompatActivity implements Contract.View, It
     }
 
     @Override
-    public void onItemClicked() {
-        Toast.makeText(this, "Item clicked", Toast.LENGTH_SHORT).show();
+    public void onItemClicked(User user) {
+        Intent intent = new Intent(this, UserDetailsActivity.class);
+        intent.putExtra("passedUser", user);
+        startActivity(intent);
     }
 }
 

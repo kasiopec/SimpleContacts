@@ -3,4 +3,13 @@
     <string name="user_name">Name</string>
     <string name="user_email">Email</string>
     <string name="user_photo_description">Photo of the user</string>
+    <string name="user_details_email_text">Email</string>
+    <string name="user_details_email_value">%1$s</string>
+    <string name="user_details_address_text">Address</string>
+    <string name="user_details_address_value">%1$s, %2$s</string>
+    <string name="user_details_phone_text">Phone</string>
+    <string name="user_details_phone_value">%1$s</string>
+    <string name="user_address_icon">User address icon</string>
+    <string name="user_email_icon">User email icon</string>
+    <string name="user_phone_icon">User phone icon</string>
 </resources>

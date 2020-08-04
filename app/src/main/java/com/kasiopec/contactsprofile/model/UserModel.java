@@ -37,9 +37,7 @@ public class UserModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(users -> {
-                    for(UserData user : users){
-                        Log.d("RESPONSE", user.getName());
-                    }
+                    presenter.updateUserData(users);
                 }));
     }
 

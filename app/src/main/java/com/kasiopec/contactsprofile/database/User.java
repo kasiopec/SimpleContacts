@@ -7,6 +7,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Room database entity that will be inserted in the table
+ * **/
 @Entity(tableName = "users")
 public class User implements Serializable {
 

@@ -13,6 +13,7 @@ import com.kasiopec.contactsprofile.retrofit.UserData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
@@ -43,26 +44,38 @@ public class UserRepository implements Contract.Repository {
     public void fetchAllUsers() {
         compositeDisposable.add(endpointAPI.getUsers()
                 .subscribeOn(Schedulers.io())
+                .onErrorReturn((Throwable ex) -> {
+                    Log.d("ERROR", Objects.requireNonNull(ex.getMessage()));
+                    return new ArrayList<>();
+                })
                 .repeatWhen(completed -> completed.delay(5, TimeUnit.SECONDS))
+                .retryWhen(error -> error.delay(1, TimeUnit.SECONDS))
                 .subscribe(response -> {
                     List<User> userList = new ArrayList<>();
-
-                    for(UserData responseItem : response){
-                        User user = new User();
-                        user.setName(responseItem.getName());
-                        user.setId(responseItem.getId());
-                        user.setEmail(responseItem.getEmail());
-                        user.setCity(responseItem.getAddress().getCity());
-                        user.setStreet(responseItem.getAddress().getStreet());
-                        user.setImageUrl("");
-                        user.setPhoneNumber(responseItem.getPhone());
-                        userList.add(user);
+                    if(!response.isEmpty()){
+                        for(UserData responseItem : response){
+                            User user = new User();
+                            user.setName(responseItem.getName());
+                            user.setId(responseItem.getId());
+                            user.setEmail(responseItem.getEmail());
+                            user.setCity(responseItem.getAddress().getCity());
+                            user.setStreet(responseItem.getAddress().getStreet());
+                            user.setImageUrl("");
+                            user.setPhoneNumber(responseItem.getPhone());
+                            userList.add(user);
+                        }
+                        Log.d("RESPONSE", "TICK");
+                        //API is not giving any profile pictures, so I added my own just for the
+                        //showcase sake
+                        userList.get(0).setImageUrl("https://i.imgur.com/3djn0E4.png");
+                        //Adding users to the database after converting JSON response into DB entity
+                        userDataDAO.upsertAllUsers(userList);
                     }
-                    Log.d("RESPONSE", "TICK");
-                    //Adding users to the database after converting JSON response into DB entity
-                    userDataDAO.upsertAllUsers(userList);
+                }, error -> {
+                    Log.d("ERROR", Objects.requireNonNull(error.getMessage()));
                 }));
     }
+
 
     /**
      * Calls room database in order to return latest data

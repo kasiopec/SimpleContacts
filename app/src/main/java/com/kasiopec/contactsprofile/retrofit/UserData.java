@@ -2,7 +2,9 @@ package com.kasiopec.contactsprofile.retrofit;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+/**
+ * POJO that is received from the API
+ * **/
 public class UserData {
     @SerializedName("id")
     @Expose

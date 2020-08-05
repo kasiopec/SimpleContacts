@@ -12,13 +12,12 @@ import androidx.room.RoomDatabase;
 @Database(entities = {User.class}, version = 1, exportSchema = false)
 public abstract class UserRoomDatabase extends RoomDatabase {
 
+    //To get instance of the DAO
     public abstract UserDataDAO  getUserDao();
 
     private static volatile UserRoomDatabase INSTANCE;
-    private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
+    //Creation of the db, ensures that only 1 instance is created
     public static UserRoomDatabase getInstance(final Context context) {
         if (INSTANCE == null) {
             synchronized (UserRoomDatabase.class) {

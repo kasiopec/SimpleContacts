@@ -6,17 +6,16 @@ import com.kasiopec.contactsprofile.retrofit.UserData;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
 
 public interface Contract {
 
     interface View{
-        void displayUserInfo(List<UserData> list);
+        void displayErrorToast(String errorMessage);
+        void displayUserData(List<User> userList);
     }
 
     interface Presenter{
-        Flowable<List<User>> getDbDataFromRepository();
-        void getData();
+        void startFetching();
         void onActivityDestroy();
     }
 

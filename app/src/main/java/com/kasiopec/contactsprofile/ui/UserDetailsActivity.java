@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.github.abdularis.civ.AvatarImageView;
@@ -40,19 +39,19 @@ public class UserDetailsActivity extends AppCompatActivity {
             emailValue.setText(getString(R.string.user_details_email_value, passedUser.getEmail()));
             addressValue.setText(getString(R.string.user_details_address_value, passedUser.getCity(), passedUser.getStreet()));
             phoneNumberValue.setText(getString(R.string.user_details_phone_value, passedUser.getPhoneNumber()));
-            phoneNumberValue.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
-                            Uri.fromParts("tel", phoneNumberValue.getText().toString(),
-                                    null));
-                    startActivity(phoneIntent);
-                }
+            //Opening default dial app to call the number
+            phoneNumberValue.setOnClickListener(view -> {
+                Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.fromParts("tel", phoneNumberValue.getText().toString(),
+                                null));
+                startActivity(phoneIntent);
             });
             char userNameChar = passedUser.getName().charAt(0);
             if (passedUser.getImageUrl().equals("")) {
+                userImage.setState(AvatarImageView.SHOW_INITIAL);
                 userImage.setText(String.valueOf(userNameChar));
             } else {
+                userImage.setState(AvatarImageView.SHOW_IMAGE);
                 Picasso.get().load(passedUser.getImageUrl()).into(userImage);
             }
         }

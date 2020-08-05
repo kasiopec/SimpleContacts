@@ -45,8 +45,10 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         char userNameChar = usersList.get(position).getName().charAt(0);
 
         if (usersList.get(position).getImageUrl().equals("")) {
+            holder.userPhoto.setState(AvatarImageView.SHOW_INITIAL);
             holder.userPhoto.setText(String.valueOf(userNameChar));
         } else {
+            holder.userPhoto.setState(AvatarImageView.SHOW_IMAGE);
             Picasso.get().load(usersList.get(position).getImageUrl()).into(holder.userPhoto);
         }
         holder.userCard.setOnClickListener(view -> clickHandler.onItemClicked(usersList.get(position)));

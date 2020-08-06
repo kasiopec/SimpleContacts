@@ -1,7 +1,6 @@
 package com.kasiopec.contactsprofile;
 
 import com.kasiopec.contactsprofile.database.User;
-import com.kasiopec.contactsprofile.retrofit.UserData;
 
 import java.util.List;
 

@@ -16,6 +16,16 @@ public class Presenter implements Contract.Presenter {
     }
 
     /**
+     * Method starts a fetch process inside the repository and receives
+     * data from the room database
+     * **/
+    @Override
+    public void startFetching() {
+        repository.fetchAllUsers();
+        observeRoomDatabase();
+    }
+
+    /**
      * Method that performs observation of the data in the database
      * When the new data is received it will tell the view to display it
      * In case there is an error, error toast will be displayed
@@ -29,16 +39,6 @@ public class Presenter implements Contract.Presenter {
                 }, error -> {
                     view.displayErrorToast(error.getMessage());
                 }));
-    }
-
-    /**
-     * Method starts a fetch process inside the repository and receives
-     * data from the room database
-     * **/
-    @Override
-    public void startFetching() {
-        repository.fetchAllUsers();
-        observeRoomDatabase();
     }
 
     /**

@@ -48,7 +48,9 @@ public class UserRepository implements Contract.Repository {
                     Log.d("ERROR", Objects.requireNonNull(ex.getMessage()));
                     return new ArrayList<>();
                 })
-                .repeatWhen(completed -> completed.delay(5, TimeUnit.SECONDS))
+                //Repeating the same call every 10 minutes
+                .repeatWhen(completed -> completed.delay(10, TimeUnit.MINUTES))
+                //onError shutdowns the subscription, to avoid that we retry onError
                 .retryWhen(error -> error.delay(1, TimeUnit.SECONDS))
                 .subscribe(response -> {
                     List<User> userList = new ArrayList<>();
@@ -64,9 +66,7 @@ public class UserRepository implements Contract.Repository {
                             user.setPhoneNumber(responseItem.getPhone());
                             userList.add(user);
                         }
-                        Log.d("RESPONSE", "TICK");
-                        //API is not giving any profile pictures, so I added my own just for the
-                        //showcase sake
+                        //API is not giving any profile pictures, so I added my own just for the showcase sake
                         userList.get(0).setImageUrl("https://i.imgur.com/3djn0E4.png");
                         //Adding users to the database after converting JSON response into DB entity
                         userDataDAO.upsertAllUsers(userList);
